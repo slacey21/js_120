@@ -1,0 +1,20 @@
+5. Identify the Constructors for each of the following methods and classify each method as either a "Static" or a "Prototype" method:
+- substring: 
+    CONSTRUCTOR: String
+    TYPE: Prototype
+
+- create: 
+    CONSTRUCTOR: Objetc
+    TYPE: Static
+
+- fromCharCode: 
+    CONSTRUCTOR: String
+    TYPE: Static
+
+- slice: 
+    CONSTRUCTOR: String, Array
+    TYPE: Prototype
+
+- toString: 
+    CONSTRUCTOR: String, Object, Number, Array
+    TYPE: Prototype
