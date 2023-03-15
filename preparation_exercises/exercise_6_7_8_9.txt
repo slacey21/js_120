@@ -1,0 +1,29 @@
+6. Which of the following names satisfy the style guidelines for variable names? 
+For the purposes of this question, constants are not variables.
+
+ANSWER:
+index
+lazyDog
+operand2
+
+7. Which of the following names satisfy the style guidelines for function names?
+
+ANSWER:
+index
+lazyDog
+operand2
+CatName
+
+8. Which of the following names satisfy the style guidelines for 
+constants used to represent magic numbers?
+
+ANSWER: 
+BIG_NUMBER
+
+9. Which of the following names don't satisfy the style 
+guidelines for naming variables, functions, or constants?
+
+ANSWER:
+snake_case
+quick_Fox
+1stCharacter
