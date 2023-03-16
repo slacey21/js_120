@@ -1,0 +1,8 @@
+4. Explain why this code logs '510' instead of 15.
+
+console.log('5' + 10);
+
+ANSWER:
+Because of the use of the + operator with at least one operand being a String,
+JavaScript uses implicit type coercion to coerce 10 to the string '10' and then uses
+the plus operator (+) to concatenate the two strings '5' and '10' into '510'.
