@@ -1,0 +1,13 @@
+5. Take a look at this code snippet: What does it log to the console and why?
+
+let foo = 'bar';
+{
+  let foo = 'qux';
+}
+
+console.log(foo);
+
+ANSWER: This will log 'bar' to the console because that is the value given to 
+foo at the same scope as the console.log call. The "let foo = 'qux'" call within the 
+block will create a new foo at that block level, but the foo accessed outside of that block
+still holds the value 'bar'.
