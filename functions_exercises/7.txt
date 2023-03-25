@@ -1,0 +1,17 @@
+7. Without running the following code, what do you think it will output?
+
+function foo(bar, qux) {
+  console.log(bar);
+  console.log(qux);
+}
+
+foo('Hello');
+
+ANSWER:
+'Hello'
+undefined
+
+Since a second argument was not given to the foo call and 
+there is no default value assigned to qux, the value for qux
+is undefined and the the console.log(qux) call 
+in the function body will log undefined.

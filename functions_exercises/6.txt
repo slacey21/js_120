@@ -1,0 +1,39 @@
+6. In the code below, identify the following terms:
+- the function arguments
+- the function body
+- the function declaration
+- the function invocation
+- the function name
+- the function parameters
+- the function return value
+- the names of all variables in this program
+
+
+// code
+function multiplyNumbers(num1, num2, num3) {
+  let result = num1 * num2 * num3;
+  return result;
+}
+
+let product = multiplyNumbers(2, 3, 4);
+//
+
+FUNCTION ARGUMENTS: 2, 3, 4
+FUNCTION body: let result = num1 * num2 * num3;
+  return result;
+FUNCTION DECLARATION: 
+  function multiplyNumbers(num1, num2, num3) {
+    let result = num1 * num2 * num3;
+    return result;
+  }
+FUNCTION INVOCATION: multiplyNumbers(2, 3, 4);
+FUNCTION NAME: multiplyNumbers
+FUNCTION PARAMETERS: num1, num2, num3
+FUNCTION RETURN VALUE: result
+NAMES OF ALL VARIABLES IN THIS PROGRAM:
+  multipleNumbers
+  num1
+  num2
+  num3
+  result
+  product

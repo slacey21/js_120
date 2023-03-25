@@ -1,0 +1,10 @@
+5. What does the following code log to the console?
+
+function scream(words) {
+  return words + '!!!!';
+}
+
+scream('Yipeee');
+
+ANSWER:
+The code does not log anything to the console because console.log() is not called.

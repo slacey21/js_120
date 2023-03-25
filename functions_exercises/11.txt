@@ -1,0 +1,21 @@
+11. Using the code from Exercise 9, are the left and right variables 
+on lines 1 and 2 the same as the left and right variables on lines 10-12? 
+Explain your reasoning.
+
+1 function multiply(left, right) {
+2   let product = left * right;
+3  return product;
+4 }
+5
+6 function getNumber(prompt) {
+7  return parseFloat(question(prompt));
+8 }
+9
+10 let left = getNumber('Enter the first number: ');
+11 let right = getNumber('Enter the second number: ');
+12 console.log(`${left} * ${right} = ${multiply(left, right)}`);
+
+
+ANSWER:
+No. The left and right variables on lines 1 & 2 are local variables scoped to the 
+multiply function. The left and right variables on lines 10 and 11 are global variables.
