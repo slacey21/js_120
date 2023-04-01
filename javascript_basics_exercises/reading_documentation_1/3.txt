@@ -1,0 +1,6 @@
+3. Is there a method to capitalize a string, for example 
+turning 'mountain' into 'Mountain'?
+
+ANSWER: No, there is no method to capitalize only the first letter
+of a string.
+
