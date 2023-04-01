@@ -1,0 +1,9 @@
+7. How many arguments does the Array.prototype.join() method expect? 
+What happens if you call it with less or more arguments?
+
+ANSWER:
+It expects one argument. If you call it with no arguments, 
+the elements are separated with a comma. If provided with more than 
+one argument, the extra arguments will be ignored and only the first
+argument will be used as the separator.
+

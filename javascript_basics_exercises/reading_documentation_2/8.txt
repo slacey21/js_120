@@ -1,0 +1,5 @@
+8. Find out how we can join two or more strings together.
+
+
+ANSWER:
+You can use the + operator or the String.concat() method.

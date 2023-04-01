@@ -1,0 +1,11 @@
+2. Without looking into your notes, try to remember which primitive 
+data types are defined in JavaScript. Then find this information on MDN.
+
+ANSWER:
+String
+Boolean
+Number
+null
+undefined
+
+Technically BigInt and Symbol are primitives but not discussed in this course.
