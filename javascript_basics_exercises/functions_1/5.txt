@@ -1,0 +1,17 @@
+5. Determine the output that the following code will log to the console:
+
+
+function multiplesOfThree() {
+  let divisor = 1;
+
+  for (let dividend = 3; dividend <= 30; dividend += 3) {
+    console.log(dividend + ' / ' + divisor + ' = 3');
+    divisor += 1;
+  }
+}
+
+multiplesOfThree;
+
+ANSWER:
+There will be no output because multiplesOfThree is not invoked properly.
+You would have to write multiplesOfThree() to properly invoke the function.
