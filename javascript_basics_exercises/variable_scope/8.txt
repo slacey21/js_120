@@ -1,0 +1,15 @@
+8. What will the following code log to the console and why? Don't run it until you have tried to answer.
+
+let a = 1;
+
+function myFunction(a) {
+  console.log(a);
+}
+
+let b = 2;
+
+myFunction(b);
+
+ANSWER:  This will log 2 to the console. a is a global variable and 
+a is also a parameter value for the myFunction function. passing b in as an 
+arguument to myFunction will log the value of b.

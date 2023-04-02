@@ -1,0 +1,15 @@
+6. What will the following code log to the console and why? Don't run it until you have tried to answer.
+
+let a = 5;
+let b = false;
+
+if (a > 4) {
+  let b = true;
+}
+
+console.log(b);
+
+
+ANSWER: This will log false. The if code block creates a new variable called 'b'
+but does not mutate the variable 'b' with global scope. The global 'b' variable is the 
+one logged to the console, which will still be false.

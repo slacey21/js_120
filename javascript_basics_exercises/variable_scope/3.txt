@@ -1,0 +1,12 @@
+2. What will the following code log to the console and why? Don't run it until you have tried to answer.
+
+
+if (true) {
+  let myValue = 20;
+}
+
+console.log(myValue);
+
+
+ANSWER: Thsi will log a ReferenceError because myValue is defined with block scope
+and is deleted before being called in the console.log() call.
