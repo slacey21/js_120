@@ -1,0 +1,28 @@
+10. Determine what the following code snippet logs. First solve it 
+in your head or on paper, and only then run it in your JavaScript 
+console to check the result.
+
+let speed = 0;
+let acceleration = 24;
+let brakingForce = 19;
+
+let isMoving = brakingForce < acceleration && (speed > 0 || acceleration > 0);
+
+console.log(isMoving);
+
+ANSWER:
+true
+
+the isMoving variable evaluates to:
+(19 < 24) && (0 > 0 || 24 > 0)
+true && (false || true)
+true && true
+true
+
+
+Bonus question: Do we need the parentheses in the boolean expression or could we also have written the following?
+
+let isMoving = brakingForce < acceleration && speed > 0 || acceleration > 0;
+
+No, you need the parentheses because && has precedence over || in conditional operations,
+ so you would need parentheses to have the expression be evaluated in the desired order.
