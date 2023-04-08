@@ -4,59 +4,86 @@
 // Perform the operation on the two numbers.
 // Print the result to the terminal.
 
+// checks whether a value is a valid number
 function invalidNumber(number) {
   return number.trimStart() === '' || Number.isNaN(Number(number));
 }
 
-
-const rlsync = require('readline-sync');
-
+// formats prompts when output to the console
 function prompt(message) {
   console.log(`=> ${message}`);
 }
 
-prompt("Welcome to calculator!");
+// import dependencies
+const rlsync = require('readline-sync');
+const messages = require('./calculator_messages.json');
 
-prompt("What's the first number? ");
-let number1 = rlsync.question();
+// init
+let anotherOp;
 
-while (invalidNumber(number1)) {
-  prompt("Hmmm... that doesn't look like a valid number.");
-  number1 = rlsync.question();
-}
+// welcome message
+prompt(messages["welcome"]);
 
+do {
+  // get user input for furst number in calculation
+  prompt(messages["getFirstNum"]);
+  let number1 = rlsync.question();
 
-prompt("What's the second number? ");
-let number2 = rlsync.question();
+  // repeat prompt until user inputs a valid number
+  while (invalidNumber(number1)) {
+    prompt(messages["invalidNumber"]);
+    number1 = rlsync.question();
+  }
 
-while (invalidNumber(number2)) {
-  prompt("Hmmm... that doesn't look like a valid number.");
-  number2 = rlsync.question();
-}
+  // get user input for second number in calculation
+  prompt(messages["getSecondNum"]);
+  let number2 = rlsync.question();
 
-prompt('What operation would you like to perform?\n1) Add 2) Subtract 3) Multiply 4) Divide');
-let operation = rlsync.question();
+  // repeat prompt until user inputs a valid number
+  while (invalidNumber(number2)) {
+    prompt(messages["invalidNumber"]);
+    number2 = rlsync.question();
+  }
 
-while (!['1', '2', '3', '4'].includes(operation)) {
-  prompt("Must choose 1, 2, 3, or 4.");
-  operation = rlsync.question();
-}
+  // ask user to choose operation type
+  prompt(messages["operationChoice"]);
+  let operation = rlsync.question();
 
-let output;
+  // repeat prompt until user inputs a valid operation choice
+  while (!['1', '2', '3', '4'].includes(operation)) {
+    prompt(messages["invalidOperation"]);
+    operation = rlsync.question();
+  }
 
-switch (operation) {
-  case '1':
-    output = Number(number1) + Number(number2);
-    break;
-  case '2':
-    output = Number(number1) - Number(number2);
-    break;
-  case '3':
-    output = Number(number1) * Number(number2);
-    break;
-  case '4':
-    output = Number(number1) / Number(number2);
-    break;
-}
+  // initialize final output value
+  let output;
 
-prompt(`The result is ${output}`);
+  // perform operation depending on user's choice
+  switch (operation) {
+    case '1':
+      output = Number(number1) + Number(number2);
+      break;
+    case '2':
+      output = Number(number1) - Number(number2);
+      break;
+    case '3':
+      output = Number(number1) * Number(number2);
+      break;
+    case '4':
+      output = Number(number1) / Number(number2);
+      break;
+  }
+
+  // output final result to the console
+  prompt(messages["result"]  + output);
+
+  // prompt the user to perform another operation
+  prompt(messages["anotherOperation"]);
+  anotherOp = rlsync.question();
+
+  // repeat prompt until user inputs a valid answer for another operation
+  while (!['1', '2'].includes(anotherOp)) {
+    prompt(messages["invalidAnother"]);
+    anotherOp = rlsync.question();
+  }
+} while (anotherOp === '1');

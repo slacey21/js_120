@@ -1,0 +1,11 @@
+{
+  "welcome" : "Welcome to calculator!", 
+  "getFirstNum" : "What's the first number? ", 
+  "getSecondNum" : "What's the second number? ",
+  "invalidNumber" : "Hmmm... that doesn't look like a valid number.", 
+  "operationChoice" : "What operation would you like to perform?\n1) Add 2) Subtract 3) Multiply 4) Divide", 
+  "invalidOperation" : "Must choose 1, 2, 3, or 4.", 
+  "result" : "The result is ", 
+  "anotherOperation" : "Would you like to perform another operation?\n1) Yes 2) No", 
+  "invalidAnother" : "Must choose 1 or 2"
+}
