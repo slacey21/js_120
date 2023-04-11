@@ -1,11 +1,26 @@
 {
-  "welcome" : "Welcome to calculator!", 
-  "getFirstNum" : "What's the first number? ", 
-  "getSecondNum" : "What's the second number? ",
-  "invalidNumber" : "Hmmm... that doesn't look like a valid number.", 
-  "operationChoice" : "What operation would you like to perform?\n1) Add 2) Subtract 3) Multiply 4) Divide", 
-  "invalidOperation" : "Must choose 1, 2, 3, or 4.", 
-  "result" : "The result is ", 
-  "anotherOperation" : "Would you like to perform another operation?\n1) Yes 2) No", 
-  "invalidAnother" : "Must choose 1 or 2"
+  "en" :
+  {
+    "welcome" : "Welcome to calculator!", 
+    "getFirstNum" : "What's the first number? ", 
+    "getSecondNum" : "What's the second number? ",
+    "invalidNumber" : "Hmmm... that doesn't look like a valid number.", 
+    "operationChoice" : "What operation would you like to perform?\n1) Add 2) Subtract 3) Multiply 4) Divide", 
+    "invalidOperation" : "Must choose 1, 2, 3, or 4.", 
+    "result" : "The result is ", 
+    "anotherOperation" : "Would you like to perform another operation?\n1) Yes 2) No", 
+    "invalidAnother" : "Must choose 1 or 2"
+  }, 
+  "es" : 
+  {
+    "welcome" : "Bienvenidos a la calculadora!", 
+    "getFirstNum" : "Que es el primero numero? ", 
+    "getSecondNum" : "Que es el segundo numer0? ",
+    "invalidNumber" : "Hmmm... este no es un numero valido", 
+    "operationChoice" : "¿Qué operación te gustaría realizar?\n1) Sumar 2) Restar 3) Multiplicar 4) Dividir", 
+    "invalidOperation" : "Debe elegir 1, 2, 3 o 4.", 
+    "result" : "El resultado es ", 
+    "anotherOperation" : "¿Desea realizar otra operación?\n1) Sí 2) No", 
+    "invalidAnother" : "Debe elegir 1 o 2"
+  }
 }
