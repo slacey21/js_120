@@ -79,9 +79,9 @@ while (!['1', '2'].includes(loanUnit)) {
 message('Please enter your loan duration: ');
 let loanDuration = parseFloat(rlsync.question());
 
-while (!loanDuration) {
+while ((!loanDuration) || (loanDuration < 0)) {
   // eslint-disable-next-line no-multi-str
-  message('Invalid loan duration. Expected the following duration formats: \n \
+  message('Invalid loan duration. Expected the following non-zero duration formats: \n \
   1) XX 2) XX.XX');
 
   message('Please enter your loan duration: ');
