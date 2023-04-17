@@ -1,0 +1,81 @@
+What will the following code snippets log to the console and why? 
+
+1.
+let myWord = 'Hello';
+let myOtherWord = myWord;
+
+console.log(myWord);
+console.log(myOtherWord);
+
+ANSWER: 'Hello' 'Hello'. The two variables have the same value. These variables point to two 
+different strings in memory that have the same value.
+
+
+
+2.
+let myWord = 'Hello';
+let myOtherWord = myWord;
+myWord = 'Goodbye';
+
+console.log(myWord);
+console.log(myOtherWord);
+
+ANSWER: 'Goodbye' 'Hello'. Initially the two variables point to strings with the same value, 
+but the myWord variable is reassigned to now store 'Goodbye'. This does not change the myOtherWord
+value because they point to two different spaces in memory.
+
+
+
+3.
+let myWords = ['Hello', 'Goodbye'];
+let myOtherWords = myWords;
+myWords[0] = 'Hi';
+
+console.log(myWords);
+console.log(myOtherWords);
+
+ANSWER: ['Hi', 'Goodbye'] ['Hi', 'Goodbye']. The two variables point to the same locaiton in memory storing the 
+object value. Mutating myWords[0] changes the object at that space in memory, and thus both variables have a different 
+value now.
+
+
+
+4.
+let myWords = ['Hello', 'Goodbye'];
+let myOtherWords = myWords;
+myWords = ['Hi', 'Bye'];
+
+console.log(myWords);
+console.log(myOtherWords);
+
+ANSWER: ['Hi', 'Bye'] and ['Hello', 'Goodbye']. Initially the two variables point to the same object in memory. Then,
+myWords is reassigned to a new array. This does not mutate the original object (that myOtherWords still points to), but causes
+myWords to point to an entirely new object in a different location in memory. That is why two different objects are logged to the console.
+
+
+
+5.
+let myWords = ['Hello', 'Goodbye'];
+let myWord = myWords[0];
+myWords[0] = 'Hi';
+
+console.log(myWords);
+console.log(myWord);
+
+ANSWER: ['Hi', 'Goodbye'] and 'Hello'. myWords is a mutable array while myWord is an immutable primitive type variable storing
+a string (that just happens to be assigned the original value of myWords' first element). Reassigning myWords[0] bas no effect
+on myWord.
+
+
+
+6.
+let myWords = ['Hello', 'Goodbye'];
+let myWord = 'Hi';
+myWords[0] = myWord;
+myWord = 'Hello';
+
+console.log(myWords);
+console.log(myWord);
+
+ANSWER: ['Hi', 'Goodbye'] and 'Hello'. Reassigning myWords[0] will mutate the object referenced by myWords, but will
+not point to the same space in memory as the myWord variable, which is why reassinging myWord has no effect on the array.
