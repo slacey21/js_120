@@ -1,0 +1,68 @@
+What will the following code snippets log to the console and why?
+
+1.
+let myWord = 'Hello';
+myWord.concat(' there.');
+
+console.log(myWord);
+
+ANSWER: 'Hello' The myWord variable is immutable. Although the concat method is called on the 
+myWord variable, that method returns a new string and does not change the original value.
+
+
+
+2. 
+let myWord = 'Hello';
+myWord.repeat(3);
+console.log(myWord);
+myWord.replace('H', 'J');
+console.log(myWord);
+myWord.toUpperCase();
+console.log(myWord);
+
+ANSWER: Hello Hello Hello. myWord is assigned a string value so it is immutable. All of the 
+methods called on it will return new string values and will not change the original variable.
+
+
+
+3. 
+let myWords = ['Hello'];
+myWords.push('Goodbye');
+
+console.log(myWords);
+
+ANSWER: ['Hello', 'Goodbye']. Objects are mutable and the push() method will mutate myWords. 
+
+
+
+4.
+let myWords = ['Hello'];
+myWords.concat(['Goodbye']);
+
+console.log(myWords);
+
+ANSWER: ['Hello']. The concat() array method does not mutate the caller (only returns new array)
+, so the original myWords array will remain unchanged.
+
+
+
+5. 
+let myWords = ['Hello'];
+myWords[0].toUpperCase();
+
+console.log(myWords);
+
+ANSWER: ['Hello]. While objects are mutable, the toUpperCase() method used on a string value
+just returns a new value, and this code does not reassign the value at myWords[0], so the original 
+object will remain unchanged.
+
+
+
+6.
+let myWords = ['Hello'];
+myWords[0] = myWords[0].toUpperCase();
+
+console.log(myWords);
+
+ANSWER: ['HELLO']. arrays are objects and are therefore mutable, so we can reassign the value of the 0th
+element and alter the original object.
