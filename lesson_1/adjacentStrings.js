@@ -26,28 +26,10 @@ function countAdjacentConsonants(word) {
 
 
 function sortStringsByConsonants(inputStrings) {
-  let stringObj = [];
-  let sortedArray = []
-  inputStrings.forEach((word) => {
-    let spacesRemovedString = word.replace(' ', '');
-    stringObj.push([word, countAdjacentConsonants(spacesRemovedString)]);
-  });
+  // eslint-disable-next-line max-len
+  let sortedStrings = inputStrings.sort((a, b) => countAdjacentConsonants(b) - countAdjacentConsonants(a));
 
-  stringObj.sort((a, b) => {
-    if (a[1] > b[1]) {
-      return -1;
-    } else if (a[1] < b[1]) {
-      return 1;
-    } else {
-      return inputStrings.indexOf(a[0]) > inputStrings.indexOf(b[0]);
-    }
-  });
-
-  stringObj.forEach((str) => {
-    sortedArray.push(str[0]);
-  });
-
-  return sortedArray;
+  return sortedStrings;
 }
 
 // console.log(countAdjacentConsonants('')); // expected 0
