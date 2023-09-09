@@ -9,17 +9,19 @@ integer input.
 */
 
 function timeOfDay(time) {
-  const DAY_AS_MINUTES = 24 * 60;
-  let timeRem = Math.abs(time) % DAY_AS_MINUTES;
+  const HOURS_PER_DAY = 24;
+  const MINUTES_PER_HOUR = 60;
+  const MINUTES_PER_DAY = HOURS_PER_DAY * MINUTES_PER_HOUR;
+  let timeRem = Math.abs(time) % MINUTES_PER_DAY;
   let hours = 0;
   let minutes = 0;
 
   if (time >= 0) {
-    hours = String(Math.floor(timeRem / 60));
-    minutes = String(Math.round(timeRem % 60));
+    hours = String(Math.floor(timeRem / MINUTES_PER_HOUR));
+    minutes = String(Math.round(timeRem % MINUTES_PER_HOUR));
   } else {
-    hours = String(23 - Math.floor(timeRem / 60));
-    minutes = String(Math.round(60 - (timeRem % 60)));
+    hours = String(23 - Math.floor(timeRem / MINUTES_PER_HOUR));
+    minutes = String(Math.round(60 - (timeRem % MINUTES_PER_HOUR)));
   }
   return `${hours.padStart(2, "0")}:${minutes.padStart(2, 0)}`;
 }
