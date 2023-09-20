@@ -4,6 +4,7 @@ const INITIAL_MARKER = ' ';
 const HUMAN_MARKER = 'X';
 const COMPUTER_MARKER = 'O';
 
+const GAMES_TO_WIN_MATCH = 3;
 
 function prompt(text) {
   console.log(`=> ${text}`);
@@ -11,8 +12,6 @@ function prompt(text) {
 
 
 function displayBoard(board) {
-  console.clear();
-
   console.log(`You are ${HUMAN_MARKER}. Computer is ${COMPUTER_MARKER}.`)
 
   console.log('');
@@ -128,16 +127,18 @@ function gamePlay(board) {
 
   displayBoard(board);
 
-  return undefined;
+  // return undefined;
 }
 
 
-function gameResult(board) {
+function gameResult(board, score) {
   if (someoneWon(board)) {
-    return prompt(`${detectWinner(board)} won!`);
+    score[detectWinner(board)] += 1;
+    prompt(`${detectWinner(board)} won!\n=> The score is Human: ${score['Human']}, Computer: ${score['Computer']}.`);
   } else {
-    return prompt("It's a tie!");
+    prompt("It's a tie!");
   }
+
 }
 
 
@@ -148,15 +149,24 @@ function playAgain() {
 }
 
 
-function playMatch() {
-  let board = initializeBoard();
-  gamePlay(board);
-  gameResult(board);
+function startMatch() {
+  let score = {
+    Human: 0,
+    Computer: 0
+  };
+
+  do {
+    let board = initializeBoard();
+    gamePlay(board);
+    gameResult(board, score);
+  } while (score['Human'] < GAMES_TO_WIN_MATCH && score['Computer'] < GAMES_TO_WIN_MATCH);
+
 }
 
+
 do {
-  playMatch();
+  console.clear();
+  startMatch();
 } while (playAgain());
 
 prompt('Thank you for playing Tic Tac Toe');
-
