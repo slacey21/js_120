@@ -46,7 +46,7 @@ function playerChoosesSquare(board) {
   let square;
 
   while (true) {
-    prompt(`Choose a square ${emptySquares(board).join(", ")}`);
+    prompt(`Choose a square ${joinOr(emptySquares(board))}`);
     square = readline.question().trim();
 
     // if the chosen square is valid and available
@@ -93,6 +93,20 @@ function detectWinner(board) {
   return null;
 }
 
+function joinOr(arr, sep = ", ", word = "or") {
+  if (arr.length < 2) {
+    return arr.join();
+  } else if (arr.length === 2) {
+    return `${arr[0]} ${word} ${arr[1]}`;
+  } else {
+    return `${arr.slice(0, arr.length - 1).join(sep)}${sep}${word} ${arr[arr.length - 1]}.`;
+  }
+}
+
+let score = {
+  Human: 0,
+  Computer: 0
+};
 
 while (true) {
   let board = initializeBoard();
@@ -112,9 +126,11 @@ while (true) {
 
   if (someoneWon(board)) {
     prompt(`${detectWinner(board)} won!`);
+    score[detectWinner(board)] += 1;
   } else {
     prompt("It's a tie!");
   }
+  prompt(`The score is Human: ${score['Human']}, Computer: ${score['Computer']}`);
 
   prompt('Would you like to play again? (y/n)');
   let answer = readline.question();
