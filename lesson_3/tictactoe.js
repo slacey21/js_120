@@ -6,13 +6,18 @@ const COMPUTER_MARKER = 'O';
 
 const GAMES_TO_WIN_MATCH = 3;
 
+const WINNING_LINES = [[1, 2, 3], [4, 5, 6], [7, 8, 9], // rows
+  [1, 4, 7], [2, 5, 8], [3, 6, 9], // columns
+  [1, 5, 9], [3, 5, 7]]; // diagonals
+
+
 function prompt(text) {
   console.log(`=> ${text}`);
 }
 
 
 function displayBoard(board) {
-  console.log(`You are ${HUMAN_MARKER}. Computer is ${COMPUTER_MARKER}.`)
+  console.log(`You are ${HUMAN_MARKER}. Computer is ${COMPUTER_MARKER}.`);
 
   console.log('');
   console.log('     |     |');
@@ -63,9 +68,39 @@ function playerChoosesSquare(board) {
 }
 
 
+// eslint-disable-next-line max-lines-per-function, max-statements
 function computerChoosesSquare(board) {
-  let randomIndex = Math.floor(Math.random() * emptySquares(board).length);
-  let square = emptySquares(board)[randomIndex];
+  let square;
+  let immediateThreat = false;
+  let line = 0;
+
+  while ((immediateThreat === false) && (line < WINNING_LINES.length)) {
+    let [sq1, sq2, sq3] = WINNING_LINES[line];
+    if (board[sq1] === HUMAN_MARKER && board[sq2] === HUMAN_MARKER &&
+      emptySquares(board).includes(String(sq3))
+    ) {
+      square = sq3;
+      immediateThreat = true;
+    } else if (board[sq2] === HUMAN_MARKER && board[sq3] === HUMAN_MARKER &&
+      emptySquares(board).includes(String(sq1))
+    ) {
+      square = sq1;
+      immediateThreat = true;
+    } else if (board[sq1] === HUMAN_MARKER && board[sq3] === HUMAN_MARKER &&
+      emptySquares(board).includes(String(sq2))
+    ) {
+      square = sq2;
+      immediateThreat = true;
+    } else {
+      line += 1;
+    }
+  }
+
+  if (!immediateThreat) {
+    console.log("GOt Here");
+    let randomIndex = Math.floor(Math.random() * emptySquares(board).length);
+    square = emptySquares(board)[randomIndex];
+  }
   board[square] = COMPUTER_MARKER;
 }
 
@@ -81,12 +116,8 @@ function someoneWon(board) {
 
 
 function detectWinner(board) {
-  let winningLines = [[1, 2, 3], [4, 5, 6], [7, 8, 9], // rows
-    [1, 4, 7], [2, 5, 8], [3, 6, 9], // columns
-    [1, 5, 9], [3, 5, 7]]; // diagonals
-
-  for (let line = 0; line < winningLines.length; line += 1) {
-    let [sq1, sq2, sq3] = winningLines[line];
+  for (let line = 0; line < WINNING_LINES.length; line += 1) {
+    let [sq1, sq2, sq3] = WINNING_LINES[line];
     if (
       [board[sq1], board[sq2], board[sq3]].every(val => val === HUMAN_MARKER)
     ) {
