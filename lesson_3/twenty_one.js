@@ -1,6 +1,8 @@
 const readline = require('readline-sync');
-const NUMBER_OF_PLAYERS = 2;
+
 const FACE_CARDS = ['J', 'Q', 'K'];
+const DEALER_STOP = 17;
+const SCORE_LIMIT = 21;
 
 function shuffle(deck) {
   for (let index = deck.length - 1; index > 0; index--) {
@@ -24,42 +26,31 @@ function initializeDeck() {
 }
 
 
-function dealCards(deck) {
-  let players = {
-    dealer: [],
-    player: []
+function initializeGame(deck) {
+  let participants = {
+    player: [],
+    dealer: []
   };
 
-  for (let round = 0; round < NUMBER_OF_PLAYERS * 2; round += 1) {
-    let card = deck.pop();
+  dealCards(participants, "player", deck, 1);
+  dealCards(participants, "dealer", deck, 1);
+  dealCards(participants, "player", deck, 1);
+  dealCards(participants, "dealer", deck, 1);
 
-    if (round % 2 === 1) {
-      players['dealer'].push(card);
-    } else {
-      players['player'].push(card);
-    }
-  }
-
-  return players;
+  return participants;
 }
 
 
-function hasBlackJack(playerHand) {
-  let handValue = playerHand.reduce((handtotal, card) => {
-    let cardValue = card.slice(0, -1);
+function dealCards(players, player, deck, numCards) {
+  for (let round = 0; round < numCards; round += 1) {
+    let card = deck.pop();
+    players[player].push(card);
+  }
+}
 
-    if (FACE_CARDS.includes(cardValue)) {
-      cardValue = 10;
-    } else if (cardValue === 'A') {
-      cardValue = 11;
-    } else {
-      cardValue = Number(cardValue);
-    }
 
-    return handtotal += cardValue;
-  }, 0);
-
-  return handValue === 21;
+function hasBlackJack(cards) {
+  return calculateScore(cards) === SCORE_LIMIT;
 }
 
 
@@ -69,14 +60,92 @@ function checkBlackJacks(players) {
   } else if (hasBlackJack(players['player']) && !hasBlackJack(players['dealer'])) {
     return "Blackjack! Player wins.";
   } else if (!hasBlackJack(players['player']) && hasBlackJack(players['dealer'])) {
-    return "Tough luck! Dealer has blackjack. Delaer wins.";
+    return "Tough luck! Dealer has blackjack. Dealer wins.";
+  } else {
+    return false;
   }
 }
 
 
-let players = dealCards(initializeDeck());
+function calculateScore(cards) {
+  let cardValues = cards.map(card => card.slice(0, -1));
+
+  let handValue = cardValues.reduce((handTotal, card) => {
+    if (FACE_CARDS.includes(card)) {
+      handTotal += 10;
+    } else if ((card === 'A') && (handTotal + 11 <= SCORE_LIMIT)) {
+      handTotal += 11;
+    } else if ((card === 'A') && (handTotal + 11 > SCORE_LIMIT)) {
+      handTotal += 1;
+    } else {
+      handTotal += Number(card);
+    }
+    return handTotal;
+  }, 0);
+
+  return handValue;
+}
+
+
+function playerPlays(players, deck) {
+  let action;
+  do {
+    console.log("Hit or Stay (h or s)?");
+    action = readline.question().trim().toLowerCase();
+
+    if (action === 'h') dealCards(players, "player", deck, 1);
+    console.log(calculateScore(players['player']));
+  } while ((calculateScore(players['player']) < SCORE_LIMIT) && (action === 'h'));
+}
+
+
+function isBusted(player) {
+  return calculateScore(player) > SCORE_LIMIT;
+}
+
+
+function dealerPlays(players, deck) {
+  while ((calculateScore(players['dealer']) < DEALER_STOP)) {
+    dealCards(players, 'dealer', deck, 1);
+  }
+}
+
+
+function determineResult(players) {
+  let dealerScore = calculateScore(players['dealer']);
+  let playerScore = calculateScore(players['player']);
+
+  if ((isBusted(players['player'])) && (!isBusted(players['dealer']))) {
+    console.log("Dealer wins.");
+  } else if ((!isBusted(players['player'])) && (isBusted(players['dealer']))) {
+    console.log("Player wins.");
+  } else if (dealerScore > playerScore) {
+    console.log("Dealer wins.");
+  } else if (playerScore > dealerScore) {
+    console.log("Player wins.");
+  } else {
+    console.log("It's a tie.");
+  }
+}
+
+
+let deck = initializeDeck();
+let players = initializeGame(deck);
 console.log(players);
-console.log(checkBlackJacks(players));
+
+if (checkBlackJacks(players)) {
+  console.log(checkBlackJacks(players));
+} else {
+  playerPlays(players, deck);
+}
+
+if (!isBusted(players['player'])) {
+  dealerPlays(players, deck);
+}
+console.log(players);
+
+determineResult(players);
+
 /* HIGH_LEVEL PSEUDO CODE
   1. Initialize the deck
 
@@ -88,9 +157,11 @@ console.log(checkBlackJacks(players));
 
   4. If no blackjacks, ask the player to make a choice
     a. until the player either (1) busts or (2) chooses to stay, continue dealing cards
+
   5. Deal cards to the dealer until:
     a. dealer busts
-    b. dealer reaches at least 17 wihtout busting
+    b. dealer reaches at least 17 without busting
+
   6. Once dealing is complete, compare scores
     a. if one player busted and the other did not, then busted player loses
     b. if neither busted, player closest to 21 wins
