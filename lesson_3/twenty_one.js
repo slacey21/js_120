@@ -180,7 +180,7 @@ do {
   playAgain = readline.question().trim().toLowerCase();
 
   while (!["y", "n"].includes(playAgain)) {
-    console.log("That is not a valid option. Want to play again? Choose 'y' or 'n'.")
+    console.log("That is not a valid option. Want to play again? Choose 'y' or 'n'.");
     playAgain = readline.question().trim().toLowerCase();
   }
   console.clear();
