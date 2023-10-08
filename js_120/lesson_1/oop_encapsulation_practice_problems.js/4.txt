@@ -1,0 +1,4 @@
+In JavaScript, how does encapsulation differ from encapsulation in most other OO languages?
+
+In JavaScript, OOP differs from encapuslation in other languages in that 
+it has less ability to restrict access to properties and methods of objects.

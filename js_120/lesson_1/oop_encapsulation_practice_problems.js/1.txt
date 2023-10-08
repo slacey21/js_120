@@ -1,0 +1,6 @@
+In your own words, what is Object Oriented Programming?
+
+Object Oriented Programming is a general programming framework 
+that allows a programmer to represent the elements of a program as objects
+that can capture the object's properties and the object's state. It generally
+creates better readability in a program.

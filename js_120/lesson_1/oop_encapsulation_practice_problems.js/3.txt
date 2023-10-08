@@ -1,0 +1,4 @@
+In your own words, what does encapsulation refer to in JavaScript?
+
+Encapsulation refers to the idea of combining properties and actions 
+into a consolidated entity.

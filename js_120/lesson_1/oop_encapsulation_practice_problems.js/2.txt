@@ -1,0 +1,8 @@
+Describe some advantages and disadvantages of OOP.
+
+Some advantages are that OOP generally leads to better readability in 
+very large programs and can allow the programmer to simplify the concepts
+they are working with.
+
+Some disadvantages are that sometimes programs get longer and require more memory and
+do not always simplify a program.
