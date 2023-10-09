@@ -1,0 +1,2 @@
+The getDescription() method is duplicated, but each object needs its own
+unique title and author properties
