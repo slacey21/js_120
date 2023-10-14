@@ -5,6 +5,8 @@ const CHOICES = ['rock', 'paper', 'scissors'];
 function createPlayer() {
   return {
     move: null,
+    score: 0,
+    moveHistory: []
   };
 }
 
@@ -12,7 +14,6 @@ function createHuman() {
   let playerObject = createPlayer();
 
   let humanObject = {
-    score: 0,
 
     choose () {
       let choice;
@@ -25,6 +26,7 @@ function createHuman() {
       }
 
       this.move = choice;
+      this.moveHistory.push(choice);
     }
   };
 
@@ -35,11 +37,11 @@ function createComputer() {
   let playerObject = createPlayer();
 
   let computerObject = {
-    score: 0,
 
     choose() {
       let randomIndex = Math.floor(Math.random() * CHOICES.length);
       this.move = CHOICES[randomIndex];
+      this.moveHistory.push(this.move);
     }
   };
 
@@ -96,6 +98,20 @@ const RPSGame = {
     console.log(`The score is: Human ${this.human.score}, Computer ${this.computer.score}`);
   },
 
+  displayMoveHistory() {
+    console.log('              MOVE HISTORY');
+    console.log('           HUMAN     COMPUTER');
+    for (let i = 0; i < this.human.moveHistory.length; i += 1) {
+      if (i < 10){
+        console.log(`ROUND #${i + 1}:  ${this.human.moveHistory[i].padEnd(8)}  ` + 
+        `${this.computer.moveHistory[i]}`);
+      } else {
+        console.log(`ROUND #${i + 1}: ${this.human.moveHistory[i].padEnd(8)}  ` + 
+        `${this.computer.moveHistory[i]}`);
+      }
+    }
+  },
+
   playAgain() {
     if (this.human.score < 5 && this.computer.score < 5) {
       console.log("Would you like to play again? (y/n)");
@@ -114,6 +130,7 @@ const RPSGame = {
       this.displayScore();
       if (!this.playAgain()) break;
     }
+    this.displayMoveHistory();
     this.displayGoodbyeMessage();
   },
 };
