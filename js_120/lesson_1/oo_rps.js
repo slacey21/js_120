@@ -12,6 +12,8 @@ function createHuman() {
   let playerObject = createPlayer();
 
   let humanObject = {
+    score: 0,
+
     choose () {
       let choice;
 
@@ -23,7 +25,7 @@ function createHuman() {
       }
 
       this.move = choice;
-    } 
+    }
   };
 
   return Object.assign(playerObject, humanObject);
@@ -33,6 +35,8 @@ function createComputer() {
   let playerObject = createPlayer();
 
   let computerObject = {
+    score: 0,
+
     choose() {
       let randomIndex = Math.floor(Math.random() * CHOICES.length);
       this.move = CHOICES[randomIndex];
@@ -63,7 +67,7 @@ const RPSGame = {
     if ((humanMove === 'rock' && computerMove === 'scissors') ||
         (humanMove === 'paper' && computerMove === 'rock') ||
         (humanMove === 'scissors' && computerMove === 'paper')) {
-      console.log('You wins!');
+      console.log('You win!');
     } else if ((computerMove === 'rock' && humanMove === 'scissors') ||
               (computerMove === 'paper' && humanMove === 'rock') ||
               (computerMove === 'scissors' && humanMove === 'paper')) {
@@ -73,11 +77,31 @@ const RPSGame = {
     }
   },
 
+  updateScore() {
+    let humanMove = this.human.move;
+    let computerMove = this.computer.move;
+
+    if ((humanMove === 'rock' && computerMove === 'scissors') ||
+        (humanMove === 'paper' && computerMove === 'rock') ||
+        (humanMove === 'scissors' && computerMove === 'paper')) {
+      this.human.score += 1;
+    } else if ((computerMove === 'rock' && humanMove === 'scissors') ||
+              (computerMove === 'paper' && humanMove === 'rock') ||
+              (computerMove === 'scissors' && humanMove === 'paper')) {
+      this.computer.score += 1;
+    } 
+  },
+
+  displayScore() {
+    console.log(`The score is: Human ${this.human.score}, Computer ${this.computer.score}`);
+  },
+
   playAgain() {
-    console.log("Would you like to play again? (y/n)");
-    let answer = readline.question().toLowerCase();
-    return answer[0] === "y";
-    
+    if (this.human.score < 5 && this.computer.score < 5) {
+      console.log("Would you like to play again? (y/n)");
+      let answer = readline.question().toLowerCase();
+      return answer[0] === "y";
+    }
   },
 
   play() {
@@ -85,8 +109,10 @@ const RPSGame = {
     while (true) {
       this.human.choose();
       this.computer.choose();
+      this.updateScore();
       this.displayWinner();
-      if (this.playAgain()) break;
+      this.displayScore();
+      if (!this.playAgain()) break;
     }
     this.displayGoodbyeMessage();
   },
