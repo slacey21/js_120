@@ -1,0 +1,5 @@
+How do you create an object that doesn't have a prototype? How can you determine whether an object has a prototype?
+
+You can create an object without a prototype by using the Object.create method and passing in null
+as the object to use as the prototype. You can determine whether an object has a prototype by 
+evaluating Object.getPrototypeOf(obj) === null. If this evaluates as false, then the object has a prototype.
