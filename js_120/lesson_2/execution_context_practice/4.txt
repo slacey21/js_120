@@ -1,0 +1,3 @@
+4. What built-in methods have we learned about that we can use to specify a function's execution context explicitly?
+
+Call and apply can be used to specify an explicit function execution context.
