@@ -1,0 +1,8 @@
+What are two disadvantages of working with factory functions?
+
+1. Each object created with a factory function has a copy of all the same methods
+which can be redundant and a poor use of memory for your program.
+
+2. Objects created with a factory function have no indication that they were
+created with a factory function, so there is no real way to tell the "type"
+of the object.
