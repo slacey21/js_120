@@ -1,0 +1,79 @@
+What will the following code snippets log to the console and why?
+
+1.
+function changeMyWord(word) {
+  console.log(word);
+  word = word.toUpperCase();
+}
+
+let myWord = 'Hello';
+changeMyWord(myWord);
+console.log(myWord);
+
+ANSWER: 'Hello' and 'Hello'. Because reassignment does not mutate the original object and because
+the variable passed to this function was a primitive type, this is pass-by-value and thus the original variable
+is not reassigned.
+
+
+
+2.
+function changeMyWord(word) {
+  console.log(word);
+  word = word.toUpperCase();
+  return word;
+}
+
+let myWord = 'Hello';
+myWord = changeMyWord(myWord);
+console.log(myWord);
+
+ANSWER: 'Hello' then 'HELLO'. Because myWord is being reassigned to the return value of changeMyWord(), 
+this will change the value of the variable.
+
+
+
+3.
+function changeMyWord(word) {
+  console.log(word);
+  word = word.toUpperCase();
+  return word;
+}
+
+let myWord = 'Hello';
+let myOtherWord = changeMyWord(myWord);
+console.log(myWord);
+console.log(myOtherWord);
+
+ANSWER: 'Hello', 'Hello' then 'HELLO'. This works the same as the previous example, except, instead of reassigning the 
+myWord variable, we are creating a new variable assigned the return value of the changeMyWord function.
+
+
+
+4.
+function changeMyWords(words) {
+  console.log(words);
+  words[0] = 'Hi';
+}
+
+let myWords = ['Hello', 'Goodbye'];
+changeMyWords(myWords);
+console.log(myWords);
+
+ANSWER: ['Hello', 'Goodbye'] and ['Hi', 'Goodbye']. SInce objects are passed by reference to functions,
+the reassignment of words[0] will mutate the myWords object itself.
+
+
+
+5.
+function changeMyWords(words) {
+  console.log(words);
+  words = ['Hi', 'Goodbye'];
+}
+
+let myWords = ['Hello', 'Goodbye'];
+changeMyWords(myWords);
+console.log(myWords);
+
+ANSWER: ['Hello', 'Goodbye'] and ['Hello', 'Goodbye']. Initially the words parameter and the myWords variable 
+point to the same object in memory, but the reassignment of words to an entirely new object will not mutate the object
+that myWords points to. So, myWords is unchanged.

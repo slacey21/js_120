@@ -1,0 +1,110 @@
+What will the following code snippets log to the console and why?
+
+1. 
+let num = 5;
+
+function myFunc() {
+  num = 10;
+}
+
+myFunc();
+console.log(num);
+
+ANSWER: 10
+calling myFunc() reassigns the num variable to value 10. This is allowed since num
+has global scope and can be accessed within the scope of myFunc().
+
+
+
+2. 
+let num = 5;
+
+function myFunc() {
+  console.log(num);
+  num = 10;
+}
+
+myFunc();
+console.log(num);
+
+ANSWER: 5 10
+Calling myFunc() will first log the value of num, which is accessible in the scope of the 
+myFunc() function and will log 5. Then myFunc() reassigns num to the value of 10. Then logging num
+to the console logs the new value (as updated in teh myFunc() function) and dispalys 10.
+
+
+
+3. 
+let num = 5;
+
+function myFunc() {
+  let num = 10;
+}
+
+myFunc();
+console.log(num);
+
+ANSWER: 5
+myFunc() initializes a num variable to 10, but this local variable is deleted after the function 
+is completed running. Logging num to the console refers to the global variable and thus returns 5
+since the global variable is never altered.
+
+
+
+4. 
+let num = 5;
+
+function myFunc() {
+  console.log(num);
+  let num = 10;
+}
+
+myFunc();
+console.log(num);
+
+ANSWER: This code will raise a ReferenceError because the "let num - 10" creates a local variable
+in the function that is logged to the console before being defined.
+
+
+
+5. 
+let num = 5;
+
+function myFunc(num) {
+  num = 10;
+}
+
+myFunc();
+console.log(num);
+
+ANSWER: This logs 5. myfunc() reassigns the value of the local variable (parameter) num to 10
+but this does not affect the global variable value.
+
+
+
+6. 
+let num = 1;
+
+while (num < 3) {
+  num += 1;
+}
+
+console.log(num);
+
+ANSWER: 3. The while loop increments the num variable until it is greater than 2 and breaks
+out of the loop once the value is 3.
+
+
+
+7. 
+let num = 1;
+
+while (num < 3) {
+  let num = 5;
+  num += 1;
+}
+
+console.log(num);
+
+ANSWER: This will result in an infinite loop becasue the num in the loop condition is 
+different than the num variable being defined and incremented in the loop body.

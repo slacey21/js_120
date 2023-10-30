@@ -1,0 +1,159 @@
+ What will the following code snippets log to the console and why?
+
+ 1.
+ let color = 'yellow';
+let colors = ['red', 'green', 'blue'];
+
+function updateColors(colors) {
+  colors.push(color);
+}
+
+updateColors(colors);
+console.log(colors);
+
+ANSWER: ['red', 'green', 'blue', 'yellow']
+The color variable is accessible within the function because it has global scope. By passing in a 
+reference type like the colors array, there will be a global colors array and a local colors array 
+and both of these point to the same object in memory. Calling push() on the local colors array will
+mutate the array, which is the same array that the global colors variable points to. Thus, logging
+the global colors variable will be a mutated array that includes 'yellow' appended to the initialized array.
+
+
+
+2. 
+let color = 'yellow';
+let colors = ['red', 'green', 'blue'];
+
+function updateColors(colors, color) {
+  colors.push(color);
+}
+
+updateColors(colors);
+console.log(colors);
+
+ANSWER: ['red', 'green', 'blue', undefined]. For the same reason as in 1 the global
+colors array will be mutated in this function because it is being treated as pass-by-reference.
+The color parameter is omitted in the updateColors(colors) call, so this local variable will 
+be undefined, this why the value added to colors is undefined.
+
+
+
+3. 
+let color1 = 'purple';
+let color2 = 'pink';
+let colors = ['red', 'green', 'blue'];
+
+function updateColors(colors, color) {
+  colors.push(color);
+}
+
+updateColors(colors, color1);
+updateColors(colors, color2);
+console.log(colors);
+
+ANSWER: ['red', 'green', 'blue', 'purple', 'pink']
+Again, as in 1 this global array will be mutated, but now we pass in arguments
+for the value to be added to the array.
+
+
+
+4.
+let color1 = 'purple';
+let color2 = 'pink';
+let colors = ['red', 'green', 'blue'];
+
+function updateColors(colors, color) {
+  colors.push(color);
+  return colors;
+}
+
+let newColors = updateColors(colors, color1);
+updateColors(newColors, color2);
+console.log(colors);
+
+ANSWER: ['red', 'green', 'blue', 'purple', 'pink']
+The updateColors(colors, color) function now has a return value – so this function is 
+mutating the array passed in as an argument as well as returning the local variable that
+shadows the variable passed as an argument. Here we assign newColors to this local copy. 
+At line 10, colors and newColors point to the same object. Then we pass in newColors to the 
+updateColors function and mutate it. By mutating the object that points to the array that 
+newColors points to, we also mutate the array that colors points to. Thus 'purple' and 'pink' have both
+been appended to the original colors array.
+
+
+
+5.
+let color = 'purple';
+let colors = ['red', 'green', 'blue'];
+
+function addColor(colors, color) {
+  colors.push(color);
+  return colors;
+}
+
+function removeColor(colors) {
+  color = colors.pop();
+  return colors;
+}
+
+let newColors = removeColor(colors);
+addColor(colors, color);
+console.log(newColors);
+
+ANSWER: ['red', 'green', 'blue'] 
+The first call to removeColor(colors) removes the last element of both the global
+and local colors variables. This function also reassigns the global color variable to 
+the value returned by calling colors.pop(), which is 'blue'. Now, newColors and colors 
+both reference the same array ['red', 'green']. We then call addColor() on colors and color
+(which is 'blue' now). addColor() then appends 'blue' to the global and local colors variables.
+Since colors and newColors both reference the same arrays, logging newColors logs ['red', 'green', 'blue']
+
+
+
+6.
+function capitalize() {
+  return word[0].toUpperCase() + word.slice(1);
+}
+
+function exclaim() {
+  return word += '!!!';
+}
+
+let word = 'hello';
+let capitalizedWord = capitalize(word);
+let exclaimedWord = exclaim(capitalizedWord);
+
+console.log(word);
+console.log(capitalizedWord);
+console.log(exclaimedWord);
+
+ANSWER: 'hello!!!', 'Hello', 'hello!!!'
+capitalizedWord gets the return value of capitalizing the first character of the word 
+variable. This does not mutate the word variable. exclaim() returns word with '!!!' appended to it. 
+Arguments are passed in when invoking these functions on lines 10 and 11, but they are ignored because
+neither function takes arguments. Since capitalize() uses toUpperCase() and slice(), this does not reassign the 
+value of word, but creates a copy of it. the exlaim() function will reassign word to be 'hello!!!' In other words,
+capitalize() creates and returns a new string, while exclaim() reassigns word to a new value.
+
+
+
+7.
+function capitalize(word) {
+  return word[0].toUpperCase() + word.slice(1);
+}
+
+function exclaim(word) {
+  return word += '!!!';
+}
+
+let word = 'hello';
+let capitalizedWord = capitalize(word);
+let exclaimedWord = exclaim(capitalizedWord);
+
+console.log(word);
+console.log(capitalizedWord);
+console.log(exclaimedWord);
+
+ANSWER: 'hello', 'Hello', 'Hello!!!'
+This is similar to 6, but now we have function parameters that are reassigned and returned 
+instead of the global word variable.
