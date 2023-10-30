@@ -1,0 +1,24 @@
+9. What does the following code log to the console ? Why ?
+
+let foo = {
+    a: 'hello',
+    b: 'world',
+};
+
+let qux = 'hello';
+
+function bar(argument1, argument2) {
+    argument1.a = 'hi';
+    argument2 = 'hi';
+}
+
+bar(foo, qux);
+
+console.log(foo.a);
+console.log(qux);
+
+ANSWER:
+The code will log 'hi' and 'hello'. Objects are mutable so the reassignment of the 
+a property will permanently mutate the foo object when passed in as argument1. The qux variable
+will not be mutated because primitives cannot be mutated and because reassignment of a global
+variable in local scope will not permanently reassign the value of the global variable.

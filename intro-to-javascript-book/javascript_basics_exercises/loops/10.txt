@@ -1,0 +1,26 @@
+10. What is the difference between the two code snippets?
+
+////////////////
+let counter = 0;
+
+while (counter > 0) {
+  console.log('Woooot!');
+  counter -= 1;
+}
+
+
+////////////////
+let counter = 0;
+
+do {
+  console.log('Woooot!');
+  counter -= 1;
+} while (counter > 0);
+
+
+ANSWER:
+The first code snippet checks the condition before doing anything.
+The second code snippet performs the action first one time before checking the condition.
+
+In this case the first code snippet will not log anything, and the second
+code snippet will log 'Woooot!' once to the console.

@@ -1,0 +1,23 @@
+3. The following code causes an infinite loop (a loop that never stops iterating). Why?
+
+let counter = 0;
+
+while (counter = 1) {
+  console.log(counter);
+  counter += 1;
+
+  if (counter > 2) {
+    break;
+  }
+}
+
+ANSWER:
+The conditional expression in the while loop uses '='
+which is the assignment operator, not an equality operator.
+So the return value of assigning the variable 'counter' to the value 1
+returns 1 each time the expression is evaluated. the return value of 
+'counter = 1' is 1 which is truthy, so the loop condition is never false.
+Additionally, the code inside the loop increments counter by 1, but every loop
+iteration, we are assigning counter to 1, so counter will never be > 2
+this the if conditional is never true and the break statement is never
+executed.

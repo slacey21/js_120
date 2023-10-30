@@ -1,0 +1,4 @@
+4. How can we access the element 'and' in the array ['fish', 'and', 'chips']?
+
+ANSWER: Using the square bracket notation and passing in the index value
+for the 'and' element. In this case it would be arrayName[1].

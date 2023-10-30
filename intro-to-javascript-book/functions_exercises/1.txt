@@ -1,0 +1,16 @@
+1. What does this code log to the console? 
+Does executing the foo function affect the output? Why or why not?
+
+let bar = 1;
+function foo() {
+  let bar = 2;
+}
+
+foo();
+console.log(bar);
+
+ANSWER:
+This code logs 1 to the console. Executing the foo function does not affect 
+the output because foo only defines the bar variable within the scope of the foo()
+function. Once console.log(bar); is called, that references the bar variable at the 
+global scope.

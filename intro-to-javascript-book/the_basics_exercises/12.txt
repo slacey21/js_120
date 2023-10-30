@@ -1,0 +1,9 @@
+12. What value does the following expression evaluate to?
+
+'12' < '9'
+
+ANSWER: true
+
+This answer evaluates to true because when comparing two strings not using the === operator
+JavaScript performs a character-by-character comparison from left to right. First it compares 1 to 9
+and concludes that the LHS is less than the RHS, thus returning true.

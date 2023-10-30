@@ -1,0 +1,18 @@
+5. What will the following code log to the console and why? Don't run it until you have tried to answer.
+
+function myFunction() {
+  let a = 1;
+
+  if (true) {
+    console.log(a);
+    let a = 2;
+    console.log(a);
+  }
+}
+
+myFunction();
+
+
+ANSWER: This code will log a ReferenceError because the inner code block knows that
+a variable a will be defined but has not yet been defined, so the inner scope a variable 
+will not be able to be referenced.

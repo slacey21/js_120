@@ -1,0 +1,25 @@
+9. Identify all of the variables named on each line of the following code.
+
+
+1 function multiply(left, right) {
+2   let product = left * right;
+3  return product;
+4 }
+5
+6 function getNumber(prompt) {
+7  return parseFloat(question(prompt));
+8 }
+9
+10 let left = getNumber('Enter the first number: ');
+11 let right = getNumber('Enter the second number: ');
+12 console.log(`${left} * ${right} = ${multiply(left, right)}`);
+
+ANSWER:
+Line 1: multiply, left, right
+LINE 2: product, left, right
+LINE 3: product
+LINE 6: getNumber, prompt
+LINE 7: parseFloat, question, prompt
+LINE 10: left, getNumber
+LINE 11: right, getNumber
+LINE 12: console, left, right, multiple

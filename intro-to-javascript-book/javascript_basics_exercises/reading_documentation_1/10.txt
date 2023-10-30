@@ -1,0 +1,14 @@
+10l In your JavaScript console, execute the following two lines 
+of code to check whether their return values differ and if so, how. 
+Take a look at the MDN documentation on equality comparisons to 
+read about how == and === differ.
+
+'8' == 8
+'8' === 8
+
+The first will be true
+The second will be false
+
+'==' will try to coerce the type of its operands to be the same and then
+evaluate whether the values are the same. The '===' requires that the operands
+be of the same type and have the same value.

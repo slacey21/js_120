@@ -1,0 +1,10 @@
+Which of the following values are primitive values? Which are objects? Which are neither?
+
+"foo": PRIMITIVE
+3.1415: PRIMITIVE
+[ 'a', 'b', 'c' ]: OBJECT
+false: PRIMITIVE
+foo: NEITHER
+function bar() { return "bar"; }: OBJECT
+undefined: PRIMITIVE
+{ a: 1, b: 2 }: OBJECT

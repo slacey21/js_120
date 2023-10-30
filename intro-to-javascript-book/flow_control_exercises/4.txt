@@ -1,0 +1,28 @@
+4. What does the following code log to the console and why?
+
+function barCodeScanner(serial) {
+  switch (serial) {
+    case '123':
+      console.log('Product1');
+    case '113':
+      console.log('Product2');
+    case '142':
+      console.log('Product3');
+    default:
+      console.log('Product not found!');
+  }
+}
+
+barCodeScanner('113');
+
+ANSWER: 
+The code will log:
+Product2
+Product3
+Product not found!
+
+Although the argument passed to the barCodeScanner invocation 
+does match the second case, there is no 'break' statement after
+console.log('Product2'); which results in fall-through. Thus, the third
+and default expressions are also evaluated and 'Product3' and
+'Product not found!' are logged to the console.

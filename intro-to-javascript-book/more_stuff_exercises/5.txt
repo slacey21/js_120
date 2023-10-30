@@ -1,0 +1,11 @@
+5. What does the following function do?
+
+function doSomething(string) {
+  return string.split(' ').reverse().map((value) => value.length);
+}
+
+ANSWER:
+The function splits the input argument into an array using ' ' as 
+a delimiter. Then the function reverses the order of the array. Then the 
+function creates a new array with each element being the length of the 
+corresponding element in the reversed array. 

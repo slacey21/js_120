@@ -1,0 +1,13 @@
+6. Will this program produce an error when run? Why or why not?
+
+const FOO = 'bar';
+{
+  const FOO = 'qux';
+}
+
+console.log(FOO);
+
+
+ANSWER: No. The "const FOO = 'qux'" inside the block will not reassign a value
+to FOO, but will create a new block-level variable named FOO that shadows the 
+other FOO. The code will log 'bar' to the console.

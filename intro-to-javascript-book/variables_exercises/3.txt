@@ -1,0 +1,15 @@
+// 3. What happens when you run the following program? Why do we get that result?
+
+/*
+
+{
+  let foo = 'bar';
+}
+
+console.log(foo);
+
+*/
+
+ANSWER: The console will log 'undefined'
+because foo is initialized within a block so
+it does not have the same scope as the console.log call

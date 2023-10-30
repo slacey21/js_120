@@ -1,0 +1,16 @@
+/* 
+7. Predict the output of the below code. When you run the code, 
+do you see what you expected? Why or why not?
+*/
+
+let array1 = [2, 6, 4];
+let array2 = [2, 6, 4];
+
+console.log(array1 === array2);
+
+
+ANSWER:
+The output will be false. The arrays have the same value but they do not point
+to the same space in memory so they cannot be compared with the strict equality operator.
+JavaScript checks equality of two objects by checking if they are the same object, not just
+that they have the same values.

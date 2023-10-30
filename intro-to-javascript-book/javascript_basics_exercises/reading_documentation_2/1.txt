@@ -1,0 +1,28 @@
+1. In the following code snippet, find all violations of the style 
+guide. Rewrite it so that it conforms with the guide.
+
+let ice_cream_taste = 'chocolate' // should use camelCase instead of snake case
+let ice_cream_density = 10 // should use camelCase instead of snake case
+
+while(ice_cream_density > 0) // need space after while keyword
+{
+    console.log('Drip...');
+    ice_cream_density -= 1;
+}
+
+console.log('The '+ ice_cream_taste +' ice cream melted.'); // space before and after +
+
+
+
+REWRITTEN:
+
+let iceCreamTaste = 'chocolate';
+let iceCreamDensity = 10;
+
+while (iceCreamDensity > 0) {
+    console.log('Drip...');
+    iceCreamDensity -= 1;
+}
+
+console.log('The ' + iceCreamTaste + ' ice cream melted.'); 
+

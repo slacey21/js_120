@@ -1,0 +1,15 @@
+6. What are the return values of the statements on lines 3 to 5? 
+Refer to the MDN documentation about the Array object for help.
+
+
+
+let trees = ['birch', 'pine', 'sequoia', 'palm tree'];
+
+trees[trees.length - 1];
+trees.pop();
+trees[trees.length - 1];
+
+ANSWER:
+3 - 'palm tree'
+4 - 'palm tree'
+5 - 'sequoia'
