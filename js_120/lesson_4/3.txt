@@ -1,0 +1,5 @@
+Consider the objects created by the programs in problems 1 and 2. How do objects for the same animal differ from each other?
+
+The objects for the same animal have the same properties, but the objects
+created with the factory function also have the methods directly defined on them, while
+the objects created with OLOO inherit those methods from the prototype.
