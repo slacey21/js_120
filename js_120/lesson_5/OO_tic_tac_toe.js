@@ -72,12 +72,6 @@ class Board {
   }
 }
 
-class Row {
-  constructor() {
-    // We need some way to identify a row of 3 squares
-  }
-}
-
 class Player {
   constructor(marker) {
     this.marker = marker;
@@ -120,14 +114,17 @@ class TTTGame {
 
   play() {
     this.displayWelcomeMessage();
-
+    this.board.display();
+    
     while (true) {
-      this.board.display();
-
       this.humanMoves();
+      console.clear();
+      this.board.display();
       if (this.gameOver()) break;
 
       this.computerMoves();
+      console.clear();
+      this.board.display();
       if (this.gameOver()) break;
     }
 
