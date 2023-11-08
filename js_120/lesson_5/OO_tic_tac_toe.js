@@ -67,7 +67,7 @@ class Board {
     let markers = keys.filter(key => {
       // if board square marker matches player marker, include
       return this.squares[key].getMarker() === player.getMarker();
-    })
+    });
     return markers.length;
   }
 }
@@ -115,7 +115,7 @@ class TTTGame {
   play() {
     this.displayWelcomeMessage();
     this.board.display();
-    
+
     while (true) {
       this.humanMoves();
       console.clear();
@@ -173,7 +173,7 @@ class TTTGame {
     do {
       choice = Math.floor((Math.random() * 9) + 1).toString();
     } while (!validChoices.includes(choice));
-    
+
     this.board.markSquareAt(choice, this.computer.getMarker());
   }
 
@@ -184,13 +184,13 @@ class TTTGame {
   someoneWon() {
     return TTTGame.POSSIBLE_WINNING_ROWS.some(row => {
       return this.board.countMarkersFor(this.human, row) === 3 ||
-             this.board.countMarkersFor(this.computer, row) === 3
+             this.board.countMarkersFor(this.computer, row) === 3;
     });
   }
 
   isWinner(player) {
     return TTTGame.POSSIBLE_WINNING_ROWS.some(row => {
-      return this.board.countMarkersFor(player, row) === 3
+      return this.board.countMarkersFor(player, row) === 3;
     });
   }
 }
