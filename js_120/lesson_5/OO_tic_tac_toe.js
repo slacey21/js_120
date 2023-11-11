@@ -231,10 +231,35 @@ class TTTGame {
     return null;
   }
 
-  computerMoves() {
-    let choice = this.defensiveComputerMove();
+  offensiveComputerMove() {
+    // eslint-disable-next-line max-len
+    for (let rowNum = 0; rowNum < TTTGame.POSSIBLE_WINNING_ROWS.length; ++rowNum) {
+      let row = TTTGame.POSSIBLE_WINNING_ROWS[rowNum];
+      let keyToChoose = this.winningSquareAvailavle(row);
+      if (keyToChoose) return keyToChoose;
+    }
 
-    if (!choice) {
+    return null;
+  }
+
+  winningSquareAvailavle(row) {
+    if (this.board.countMarkersFor(this.computer, row) === 2) {
+      // eslint-disable-next-line max-len
+      let unusedSquareIndex = row.findIndex(elem => this.board.isUnusedSquare(elem));
+      if (unusedSquareIndex >= 0) return row[unusedSquareIndex];
+    }
+
+    return null;
+  }
+
+  computerMoves() {
+    let choice;
+
+    if (this.offensiveComputerMove()) {
+      choice = this.offensiveComputerMove();
+    } else if (this.defensiveComputerMove()) {
+      choice = this.defensiveComputerMove();
+    } else {
       let validChoices = this.board.unusedSquares();
 
       do {
