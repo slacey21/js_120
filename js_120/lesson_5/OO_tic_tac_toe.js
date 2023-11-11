@@ -106,29 +106,44 @@ class TTTGame {
     ["3", "5", "7"],
   ];
 
+  static joinOr(arr, delim = ', ', finalWord = 'or') {
+    if (arr.length === 1) {
+      return arr[0];
+    } else if (arr.length === 2) {
+      return `${arr[0]} ${finalWord} ${arr[1]}`;
+    } else {
+      return `${arr.slice(0, arr.length - 1).join(delim)}${delim}${finalWord} ${arr[arr.length - 1]}`;
+    }
+  }
+
   constructor() {
     this.board = new Board();
     this.human = new Human();
     this.computer = new Computer();
+    this.playAnother = true;
   }
 
   play() {
     this.displayWelcomeMessage();
-    this.board.display();
 
-    while (true) {
-      this.humanMoves();
-      console.clear();
+    while (this.playAnother) {
       this.board.display();
-      if (this.gameOver()) break;
 
-      this.computerMoves();
-      console.clear();
-      this.board.display();
-      if (this.gameOver()) break;
+      while (true) {
+        this.humanMoves();
+        console.clear();
+        this.board.display();
+        if (this.gameOver()) break;
+
+        this.computerMoves();
+        console.clear();
+        this.board.display();
+        if (this.gameOver()) break;
+      }
+      this.displayResults();
+      this.playAgain();
     }
 
-    this.displayResults();
     this.displayGoodbyeMessage();
   }
 
@@ -150,12 +165,33 @@ class TTTGame {
     }
   }
 
+  playAgain() {
+    let answer;
+
+    while (true) {
+      const playAgainPrompt = "Would you like to play again? (y or n)";
+      answer = readline.question(playAgainPrompt);
+
+      if (['y', 'n'].includes(answer.toLowerCase())) break;
+
+      console.log("Sorry, that's not a valid choice.");
+      console.log("");
+    }
+
+    if (answer.toLowerCase() === 'y') {
+      console.log("Let's play again!");
+      this.board = new Board();
+    } else {
+      this.playAnother = false;
+    }
+  }
+
   humanMoves() {
     let choice;
 
     while (true) {
       let validChoices = this.board.unusedSquares();
-      const prompt = `Choose a square (${this.joinOr(validChoices)}): `;
+      const prompt = `Choose a square (${TTTGame.joinOr(validChoices)}): `;
       choice = readline.question(prompt);
 
       if (validChoices.includes(choice)) break;
@@ -164,16 +200,6 @@ class TTTGame {
       console.log("");
     }
     this.board.markSquareAt(choice, this.human.getMarker());
-  }
-
-  static joinOr(arr, delim = ', ', finalWord = 'or') {
-    if (arr.length === 1) {
-      return arr[0];
-    } else if (arr.length === 2) {
-      return `${arr[0]} ${finalWord} ${arr[1]}`;
-    } else {
-      return `${arr.slice(0, arr.length - 1).join(delim)}${delim}${finalWord} ${arr[arr.length - 1]}`;
-    }
   }
 
   computerMoves() {
