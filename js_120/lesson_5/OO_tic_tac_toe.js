@@ -79,10 +79,19 @@ class Board {
 class Player {
   constructor(marker) {
     this.marker = marker;
+    this.numberOfWins = 0;
   }
 
   getMarker() {
     return this.marker;
+  }
+
+  getScore() {
+    return this.numberOfWins;
+  }
+
+  incrementScore() {
+    this.numberOfWins += 1;
   }
 }
 
@@ -99,6 +108,8 @@ class Computer extends Player {
 }
 
 class TTTGame {
+  static MATCH_GOAL = 3;
+
   static POSSIBLE_WINNING_ROWS = [
     ["1", "2", "3"],
     ["4", "5", "6"],
@@ -127,9 +138,12 @@ class TTTGame {
     this.playAnother = true;
   }
 
+
+  // eslint-disable-next-line max-lines-per-function, max-statements
   play() {
     this.displayWelcomeMessage();
 
+    // eslint-disable-next-line max-len
     while (this.playAnother) {
       this.board.display();
 
@@ -145,6 +159,9 @@ class TTTGame {
         if (this.gameOver()) break;
       }
       this.displayResults();
+      this.displayScore();
+      if (this.human.getScore() === TTTGame.MATCH_GOAL ||
+      this.computer.getScore() === TTTGame.MATCH_GOAL) break;
       this.playAgain();
     }
 
@@ -161,8 +178,10 @@ class TTTGame {
 
   displayResults() {
     if (this.isWinner(this.human)) {
+      this.updateScore(this.human);
       console.log("You won! Congratulations!");
     } else if (this.isWinner(this.computer)) {
+      this.updateScore(this.computer);
       console.log("I won! I won! Take that, human!");
     } else {
       console.log("A tie game. How boring.");
@@ -209,7 +228,7 @@ class TTTGame {
   /*
   iterates over all possible winning rows and checks if there exists a
   square in that row that can win the game, returns that square's key if so.
-  Otherwise checks all rows to see if there is a square at risk of losing. 
+  Otherwise checks all rows to see if there is a square at risk of losing.
   Returns the key of that square if exists.
   */
   intelligentComputerMove() {
@@ -286,6 +305,14 @@ class TTTGame {
     return TTTGame.POSSIBLE_WINNING_ROWS.some(row => {
       return this.board.countMarkersFor(player, row) === 3;
     });
+  }
+
+  updateScore(player) {
+    player.incrementScore();
+  }
+
+  displayScore() {
+    console.log(`The score is Human: ${this.human.getScore()}, Computer: ${this.computer.getScore()}`);
   }
 }
 
