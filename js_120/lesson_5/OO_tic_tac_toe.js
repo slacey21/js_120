@@ -206,44 +206,34 @@ class TTTGame {
     this.board.markSquareAt(choice, this.human.getMarker());
   }
 
-  // iterates over all possible winning rows and checks if a square in one of
-  // these rows is at risk. Returns at risk square key if exists
-  defensiveComputerMove() {
+  /*
+  iterates over all possible winning rows and checks if there exists a
+  square in that row that can win the game, returns that square's key if so.
+  Otherwise checks all rows to see if there is a square at risk of losing. 
+  Returns the key of that square if exists.
+  */
+  intelligentComputerMove() {
+    let defensiveKeys = [];
+
     // eslint-disable-next-line max-len
     for (let rowNum = 0; rowNum < TTTGame.POSSIBLE_WINNING_ROWS.length; ++rowNum) {
       let row = TTTGame.POSSIBLE_WINNING_ROWS[rowNum];
-      let keyToChoose = this.atRiskSquare(row);
-      if (keyToChoose) return keyToChoose;
+      let offensiveKey = this.winningSquareAvailable(this.computer, row);
+      let defensiveKey = this.winningSquareAvailable(this.human, row);
+
+      if (offensiveKey) return offensiveKey;
+      if (defensiveKey) defensiveKeys.push(defensiveKey);
     }
 
-    return null;
-  }
-
-  // given a row on the board, returns the square number of the at risk square
-  // if one exists in the given row; returns null otherwise
-  atRiskSquare(row) {
-    if (this.board.countMarkersFor(this.human, row) === 2) {
-      // eslint-disable-next-line max-len
-      let unusedSquareIndex = row.findIndex(elem => this.board.isUnusedSquare(elem));
-      if (unusedSquareIndex >= 0) return row[unusedSquareIndex];
+    if (defensiveKeys.length > 0) {
+      return defensiveKeys[0];
+    } else {
+      return null;
     }
-
-    return null;
   }
 
-  offensiveComputerMove() {
-    // eslint-disable-next-line max-len
-    for (let rowNum = 0; rowNum < TTTGame.POSSIBLE_WINNING_ROWS.length; ++rowNum) {
-      let row = TTTGame.POSSIBLE_WINNING_ROWS[rowNum];
-      let keyToChoose = this.winningSquareAvailavle(row);
-      if (keyToChoose) return keyToChoose;
-    }
-
-    return null;
-  }
-
-  winningSquareAvailavle(row) {
-    if (this.board.countMarkersFor(this.computer, row) === 2) {
+  winningSquareAvailable(player, row) {
+    if (this.board.countMarkersFor(player, row) === 2) {
       // eslint-disable-next-line max-len
       let unusedSquareIndex = row.findIndex(elem => this.board.isUnusedSquare(elem));
       if (unusedSquareIndex >= 0) return row[unusedSquareIndex];
@@ -268,11 +258,7 @@ class TTTGame {
   }
 
   computerMoves() {
-    let choice = this.offensiveComputerMove();
-
-    if (!choice) {
-      choice = this.defensiveComputerMove();
-    }
+    let choice = this.intelligentComputerMove();
 
     if (!choice) {
       choice = this.chooseCenterSquare();
