@@ -252,19 +252,34 @@ class TTTGame {
     return null;
   }
 
-  computerMoves() {
+  chooseCenterSquare() {
+    return this.board.isUnusedSquare("5") ? "5" : null;
+  }
+
+  chooseRandomSquare() {
+    let validChoices = this.board.unusedSquares();
     let choice;
 
-    if (this.offensiveComputerMove()) {
-      choice = this.offensiveComputerMove();
-    } else if (this.defensiveComputerMove()) {
-      choice = this.defensiveComputerMove();
-    } else {
-      let validChoices = this.board.unusedSquares();
+    do {
+      choice = Math.floor((Math.random() * 9) + 1).toString();
+    } while (!validChoices.includes(choice));
 
-      do {
-        choice = Math.floor((Math.random() * 9) + 1).toString();
-      } while (!validChoices.includes(choice));
+    return choice;
+  }
+
+  computerMoves() {
+    let choice = this.offensiveComputerMove();
+
+    if (!choice) {
+      choice = this.defensiveComputerMove();
+    }
+
+    if (!choice) {
+      choice = this.chooseCenterSquare();
+    }
+
+    if (!choice) {
+      choice = this.chooseRandomSquare();
     }
 
     this.board.markSquareAt(choice, this.computer.getMarker());
