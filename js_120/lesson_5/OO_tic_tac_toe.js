@@ -136,24 +136,51 @@ class TTTGame {
     this.human = new Human();
     this.computer = new Computer();
     this.playAnother = true;
+    this.firstMove = this.humanMoves;
+    this.secondMove = this.computerMoves;
   }
 
+  getFirstMove() {
+    this.firstMove();
+  }
+
+  getSecondMove() {
+    this.secondMove();
+  }
+
+  setFirstMove(move) {
+    this.firstMove = move;
+  }
+
+  setSecondMove(move) {
+    this.secondMove = move;
+  }
+
+  updateMoveOrder() {
+    if (this.firstMove === this.humanMoves) {
+      this.setFirstMove(this.computerMoves);
+      this.setSecondMove(this.humanMoves);
+    } else {
+      this.setFirstMove(this.humanMoves);
+      this.setSecondMove(this.computerMoves);
+    }
+  }
 
   // eslint-disable-next-line max-lines-per-function, max-statements
   play() {
     this.displayWelcomeMessage();
 
-    // eslint-disable-next-line max-len
+    // // eslint-disable-next-line max-len
     while (this.playAnother) {
       this.board.display();
 
       while (true) {
-        this.humanMoves();
+        this.getFirstMove();
         console.clear();
         this.board.display();
         if (this.gameOver()) break;
 
-        this.computerMoves();
+        this.getSecondMove();
         console.clear();
         this.board.display();
         if (this.gameOver()) break;
@@ -161,8 +188,10 @@ class TTTGame {
       this.displayResults();
       this.displayScore();
       if (this.human.getScore() === TTTGame.MATCH_GOAL ||
-      this.computer.getScore() === TTTGame.MATCH_GOAL) break;
+        this.computer.getScore() === TTTGame.MATCH_GOAL) break;
       this.playAgain();
+      this.board.display();
+      this.updateMoveOrder();
     }
 
     this.displayGoodbyeMessage();
