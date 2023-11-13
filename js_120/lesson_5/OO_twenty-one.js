@@ -17,6 +17,18 @@ class Card {
   toString() {
     return `${this.rank}${this.suit}`;
   }
+
+  getRank() {
+    return this.rank;
+  }
+
+  getSuit() {
+    return this.suit;
+  }
+
+  getPoints() {
+    return this.points;
+  }
 }
 
 class Deck {
@@ -55,10 +67,11 @@ class Player {
   }
 
   updateScore(card) {
-    if (card.points === 11 && this.score + 11 > TwentyOneGame.SCORE_LIMIT) {
+    // eslint-disable-next-line max-len
+    if (card.getPoints() === 11 && this.getScore() + 11 > TwentyOneGame.SCORE_LIMIT) {
       this.score += 1;
     } else {
-      this.score += card.points;
+      this.score += card.getPoints();
     }
   }
 
@@ -117,6 +130,10 @@ class TwentyOneGame {
     this.playAnother = true;
   }
 
+  getDeck() {
+    return this.deck;
+  }
+
   start() {
     this.displayWelcomeMessage();
 
@@ -142,11 +159,11 @@ class TwentyOneGame {
 
   dealCards() {
     for (let _ = 0; _ < 2; _ += 1) {
-      this.player.hit(this.deck);
+      this.player.hit(this.getDeck());
     }
 
     for (let _ = 0; _ < 2; _ += 1) {
-      this.dealer.hit(this.deck);
+      this.dealer.hit(this.getDeck());
     }
 
     this.dealer.displayHand();
@@ -166,7 +183,7 @@ class TwentyOneGame {
       this.dealer.displayHand();
 
       if (choice === "h") {
-        this.player.hit(this.deck);
+        this.player.hit(this.getDeck());
         this.player.displayHand();
         console.log("");
       } else {
@@ -198,7 +215,7 @@ class TwentyOneGame {
       console.log("");
 
       while (this.dealer.getScore() < TwentyOneGame.DEALER_STOP) {
-        this.dealer.hit(this.deck);
+        this.dealer.hit(this.getDeck());
         this.dealer.displayHand(false);
         this.player.displayHand();
         console.log("");
