@@ -19,8 +19,8 @@ bar.call(otherObj);
 /*
 ANSWER:
 Amazebulous
-Even though we invoke the bar function and attempt to call it with 
+Even though we invoke the bar function and attempt to call it with
 otherObj as its execution context, bar was assigned a copy of foo with
 its execution context permanently bound to obj. Thus, bar.call(otherObj)
-executes the same code as bar(), which logs obj.a
+executes the same code as bar(), which logs obj.a -> Amazebulous
 */
